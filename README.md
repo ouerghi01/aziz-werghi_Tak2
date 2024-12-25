@@ -50,17 +50,9 @@ venv\Scripts\activate
 
 ---
 
-### 4. Install Dependencies
 
-Install the required Python libraries by running:
 
-```bash
-pip install -r requirements.txt
-```
-
----
-
-### 5. Run the Application
+### 4. Run the Application
 
 Start the FastAPI server to run the application:
 
