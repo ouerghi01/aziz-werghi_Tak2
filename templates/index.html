@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Retrieval</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/static/index.css">
+
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>FAQ Retrieval System</h1>
+        <form
+            hx-post="/answer_to_question"
+            hx-trigger="submit"
+            hx-target="#response"
+            hx-swap="outerHtml"
+            hx-include="#question-input"
+            hx-on="htmx:afterOnLoad: document.getElementById('response').style.display = 'block';"
+        >
+            <textarea
+                id="question-input"
+                name="question"
+                placeholder="Enter your question here..."
+            ></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="response"
+        hx-swap-oob="true"
+        >
+            {{answer}}
+        </div>
+    </div>
+    <div class="footer">
+        Powered by <i class="fas fa-brain"></i> Your AI System
+    </div>
+    <script>
+        document.body.addEventListener('htmx:afterOnLoad',
+            function(evt) {
+                let answer = document.getElementById("response");
+                let content = "answer :" + answer.textContent.trim(); // Get the raw response
+                content = content.replace(/"/g, ""); // Remove all quotation marks
+                answer.textContent = content; // Set the cleaned content
+                answer.style.display = "block";
+                answer.style.color = "blue"
+                
+            }
+        )
+    </script>
+
+    
+</body>
+</html>
