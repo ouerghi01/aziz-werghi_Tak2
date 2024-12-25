@@ -1,8 +1,10 @@
 from fastapi import FastAPI,Request,Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+import uvicorn
+
 from pydantic import BaseModel
-from FAQretrieval import find_best_reponse
+from FAQretrieval import find_best_response
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -42,9 +44,11 @@ async def get_best_answer(request: Request, question: str = Form(...)):
         Exception: If an error occurs during the process of finding the best answer.
     """
     try:
-        best_answer = find_best_reponse(question)
+        best_answer = find_best_response(question)
         if not best_answer:
             return "<p> No suitable answer found. </p>"
         return best_answer
     except Exception as e:
         return f"<p> error {e}</p>"
+if __name__ == "__main__":
+    uvicorn.run("main:main", host="0.0.0.0", port=8000, reload=True)
