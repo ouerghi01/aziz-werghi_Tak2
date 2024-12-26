@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 
+
 from pydantic import BaseModel
 from FAQretrieval import find_best_response
 from fastapi.templating import Jinja2Templates
@@ -50,5 +51,7 @@ async def get_best_answer(request: Request, question: str = Form(...)):
         return best_answer
     except Exception as e:
         return f"<p> error {e}</p>"
+
 if __name__ == "__main__":
-    uvicorn.run("main:main", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    

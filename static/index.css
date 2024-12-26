@@ -2,16 +2,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+
 }
 
+
 .container {
-    max-width: 600px;
+    width: 640px;
     margin: 50px auto;
     background: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    
     padding: 20px;
 }
 
@@ -28,10 +29,12 @@ form {
 }
 
 textarea {
-    width: 100%;
+    width: 90%;
     height: 120px;
     padding: 10px;
     border: 1px solid #ddd;
+    position: relative;
+    left: 50 px ;
     border-radius: 5px;
     resize: none;
     font-size: 16px;
@@ -61,15 +64,21 @@ button:hover {
     background-color: #005bb5;
 }
 
+#spinner {
+    display: none;
+    margin: 0 auto;
+}
+
 #response {
     margin-top: 20px;
     font-size: 16px;
-    color: #555;
+    color:blueviolet;
     padding: 15px;
     background: #f1f1f1;
     border: 1px solid #ddd;
     border-radius: 5px;
     display: none;
+    text-align: center;
 }
 
 #response.visible {
@@ -79,6 +88,20 @@ button:hover {
 .footer {
     text-align: center;
     margin-top: 20px;
-    color: #aaa;
+    color: #ada0a0;
     font-size: 14px;
+}
+.loader {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #0073e6;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

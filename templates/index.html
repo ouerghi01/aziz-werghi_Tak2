@@ -25,26 +25,37 @@
                 name="question"
                 placeholder="Enter your question here..."
             ></textarea>
-            <button type="submit">Submit</button>
+            <span id="spinner" class="loader"></span>
+            <button id="clicked" type="submit">Submit</button>
         </form>
+        
         <div id="response"
         hx-swap-oob="true"
         >
             {{answer}}
         </div>
     </div>
-    <div class="footer">
+    <div  class="footer">
         Powered by <i class="fas fa-brain"></i> Your AI System
     </div>
     <script>
+        const button = document.getElementById("clicked") ;
+        const spinner = document.getElementById("spinner");
+        let answer = document.getElementById("response");
+        button.addEventListener("click",
+        () => {
+            
+            spinner.style.display="block";
+            answer.style.display="none"
+        }
+        )
         document.body.addEventListener('htmx:afterOnLoad',
             function(evt) {
-                let answer = document.getElementById("response");
+                spinner.style.display="none"
                 let content = "answer :" + answer.textContent.trim(); // Get the raw response
                 content = content.replace(/"/g, ""); // Remove all quotation marks
                 answer.textContent = content; // Set the cleaned content
                 answer.style.display = "block";
-                answer.style.color = "blue"
                 
             }
         )
